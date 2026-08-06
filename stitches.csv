@@ -1,0 +1,16 @@
+class_id,name,abbreviation,category,is_compound,label_convention,notes
+0,Chain,ch,foundational,no,box,Base for nearly every pattern; will dominate raw image counts
+1,Slip stitch,sl st,foundational,no,box,Low profile; can be visually subtle vs chain
+2,Single crochet,sc,foundational,no,box,UK name: double crochet (dc)
+3,Half double crochet,hdc,foundational,no,box,UK name: half treble (htr)
+4,Double crochet,dc,foundational,no,box,UK name: treble (tr)
+5,Treble crochet,tr,foundational,no,box,UK name: double treble (dtr)
+6,Front post double crochet,fpdc,textured,no,box,Visually similar to bpdc; watch precision once mixed in-frame
+7,Back post double crochet,bpdc,textured,no,box,Visually similar to fpdc
+8,Extended single crochet,esc,textured,no,box,Taller sc variant
+9,Double treble crochet,dtr,textured,no,box,UK name: triple treble (ttr)
+10,Shell stitch,shell,decorative_compound,yes,box,Multiple stitches worked into one base; label as one compound instance
+11,V-stitch,v_st,decorative_compound,yes,box,Two stitches with a chain gap worked into one base
+12,Cluster stitch,cluster,decorative_compound,yes,box,Multiple partial stitches joined at the top
+13,Popcorn stitch,popcorn,decorative_compound,yes,box,Several dc worked into one stitch then closed
+14,Bobble stitch,bobble,decorative_compound,yes,box,Several partial dc worked into one stitch then closed
