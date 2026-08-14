@@ -13,4 +13,5 @@ class_id,name,abbreviation,category,is_compound,label_convention,notes
 11,V-stitch,v_st,decorative_compound,yes,box,Two stitches with a chain gap worked into one base
 12,Cluster stitch,cluster,decorative_compound,yes,box,Multiple partial stitches joined at the top
 13,Popcorn stitch,popcorn,decorative_compound,yes,box,Several dc worked into one stitch then closed
-14,Bobble stitch,bobble,decorative_compound,yes,box,Several partial dc worked into one stitch then closed
+14,Puff stitch,puff,decorative_compound,yes,box,Several yarn-over loops worked into one stitch then closed; replaced bobble stitch (too visually similar to popcorn)
+15,Extended double crochet,edc,textured,no,box,Taller dc variant with an extra draw-through step; added from CVAT export (obj.names class 14) which didn't match this file's original class 14 (bobble)

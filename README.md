@@ -24,29 +24,43 @@ distortion rather than count anomalies).
 
 ## Data format expected by data_prep.py
 
-A simple JSON per image:
+Each labeling round is a CVAT "YOLO 1.1" export, stored under
+`stitch_annotations/<round_name>/`:
 
-```json
-{
-  "image": "swatch_001.jpg",
-  "width": 1024,
-  "height": 768,
-  "stitches": [
-    {"class": "sc", "bbox": [x_min, y_min, x_max, y_max]},
-    {"class": "dc", "bbox": [x_min, y_min, x_max, y_max]}
-  ]
-}
+```
+stitch_annotations/round1/
+  obj.names            one class name per line, in CVAT's class-index order
+  obj.data
+  obj_train_data/*.txt one label file per image, YOLO-normalized boxes
+  train.txt
+  swatch_images/*.png  the source photos (exported separately from CVAT)
 ```
 
-Put these under `raw_annotations/*.json` alongside the source images in
-`raw_images/`.
+`data_prep.py` matches each label file to its image by filename stem, remaps
+CVAT's class ids onto the canonical ids in `stitches.csv` (the two can drift
+independently as labeling and the class list evolve), and writes the
+Ultralytics-ready split to `data/` (gitignored, regenerate anytime).
 
 ## Quickstart
 
 ```bash
-pip install ultralytics --break-system-packages
+pip install -r requirements.txt
 
-python data_prep.py --ann-dir raw_annotations --img-dir raw_images --out data/
-python train.py --data data/stitches.yaml --epochs 100 --model yolov8s.pt
-python inference.py --weights runs/detect/train/weights/best.pt --image new_swatch.jpg
+python src/data_prep.py \
+  --export-dir stitch_annotations/round1 \
+  --img-dir stitch_annotations/round1/swatch_images \
+  --stitches-csv stitches.csv \
+  --out data
+python src/train.py --data data/stitches.yaml --epochs 100 --model yolov8s.pt --name round1_yolov8s
+python src/inference.py --weights runs/detect/round1_yolov8s/weights/best.pt --image new_swatch.jpg
+```
+
+For model-assisted labeling of a new round (run the current model on new,
+unlabeled photos to get corrected-not-hand-traced starting annotations):
+
+```bash
+python src/predict_for_review.py \
+  --weights runs/detect/round1_yolov8s/weights/best.pt \
+  --images stitch_annotations/round2/swatch_images \
+  --out stitch_annotations/round2/predicted
 ```
