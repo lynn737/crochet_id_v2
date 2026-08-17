@@ -1,4 +1,4 @@
-# Crochet Stitch ID + Counting Pipeline (sketch)
+# Crochet Stitch ID + Counting Pipeline
 
 Goal: take a photo of a crochet swatch, detect every stitch, classify its type,
 and reconstruct row-by-row instructions (e.g. "Row 1: 12 sc, Row 2: 6 dc, 2 inc...").
